@@ -1,0 +1,31 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import { auth } from '../stores/auth'
+import LoginView from '../views/LoginView.vue'
+import AppShell from '../components/AppShell.vue'
+import ProfileView from '../views/ProfileView.vue'
+import SecurityView from '../views/SecurityView.vue'
+import UsersView from '../views/UsersView.vue'
+
+export const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/login', name: 'login', component: LoginView },
+    { path: '/', component: AppShell, meta: { requiresAuth: true }, children: [
+      { path: '', redirect: '/account' },
+      { path: 'account', name: 'account', component: ProfileView },
+      { path: 'security', name: 'security', component: SecurityView },
+      { path: 'users', name: 'users', component: UsersView, meta: { admin: true } },
+    ] },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
+  ],
+})
+
+router.beforeEach(async to => {
+  try { await auth.init() } catch { return to.name === 'login' ? true : { name: 'login' } }
+  if (to.meta.requiresAuth && !auth.session.value) return { name: 'login' }
+  if (to.name === 'login' && auth.session.value) return { name: 'account' }
+  if (to.meta.admin) {
+    await auth.loadProfile()
+    if (!auth.isAdmin.value) return { name: 'account' }
+  }
+})

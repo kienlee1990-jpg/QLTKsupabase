@@ -1,13 +1,15 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import WelcomeSlideshow from './components/WelcomeSlideshow.vue'
 import YouTubePlayer from './components/YouTubePlayer.vue'
 import SongArtwork from './components/SongArtwork.vue'
 import { auth } from '../stores/auth'
 import { getMusicLinkMetadata } from '../services/musicMetadata'
 import { deleteSong as removeSong, getManagedSongs, getPlaylists, getSongs, saveSong, setSongActive as updateSongStatus, updateSong as editSongRecord, uploadSong as uploadSongFile } from '../services/music'
-import { AudioLines, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Disc3, Download, Ellipsis, Heart, Home, Library, ListMusic, Menu, Mic2, Music2, Pause, Pencil, Play, Plus, Repeat2, Search, Settings2, Shuffle, SkipBack, SkipForward, Trash2, Upload, Volume2, X } from '@lucide/vue'
+import { AudioLines, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Disc3, Download, Ellipsis, Heart, Home, Library, ListMusic, LogOut, Menu, Mic2, Music2, Pause, Pencil, Play, Plus, Repeat2, Search, Settings2, Shuffle, SkipBack, SkipForward, Trash2, Upload, Volume2, X } from '@lucide/vue'
 
+const router = useRouter()
 const songs = ref([])
 const managedSongs = ref([])
 const showEditSong = ref(false)
@@ -40,6 +42,7 @@ const isUploading = ref(false)
 const uploadError = ref('')
 const audio = ref(null)
 const toast = ref('')
+const isLoggingOut = ref(false)
 const isResolvingEmbed = ref(false)
 const soundcloudFrame = ref(null)
 const youtubePlayer = ref(null)
@@ -59,6 +62,13 @@ const visibleSongs = computed(() => songs.value.filter(song => {
 const enabledSongCount = computed(() => managedSongs.value.filter(song => song.isActive).length)
 const stoppedSongCount = computed(() => managedSongs.value.length - enabledSongCount.value)
 const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`
+async function logout() {
+  if (isLoggingOut.value) return
+  isLoggingOut.value = true
+  try { await auth.signOut(); await router.replace('/login') }
+  catch (error) { showToast(error.message || 'Không thể đăng xuất. Vui lòng thử lại.') }
+  finally { isLoggingOut.value = false }
+}
 async function readResponse(response) {
   const body = await response.text()
   if (!body.trim()) return null
@@ -359,10 +369,10 @@ onMounted(async () => {
     </aside>
 
     <main id="top" class="main-content">
-      <header class="retro-masthead"><div class="masthead-stripes"></div><div class="masthead-logo"><a class="teen-mark" href="/" aria-label="8X Teen — phát hoặc tạm dừng nhạc" @click.prevent="togglePlayback">8X<small>TEEN</small></a><span class="masthead-tagline">XUANDIEUCLUB.TK <i>—</i> WEBSITE KẾT NỐI THẾ HỆ <b>8X, 9X, 2K</b></span></div><div class="masthead-title"><small>THẾ GIỚI GIẢI TRÍ 1.0</small><strong>XuandieuClub.TK</strong><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span></div><div class="masthead-polaroids"><div class="polaroid p-one"><img src="/images/portraits/D65A7652.jpg" alt="Ảnh chân dung cùng gấu bông" width="734" height="1100" /></div><div class="polaroid p-two"><img src="/images/portraits/D65A7603.jpg" alt="Ảnh cận cảnh cùng hai chú gấu bông" width="1100" height="734" /></div><div class="polaroid p-three"><img src="/images/portraits/D65A7749.jpg" alt="Ảnh kỷ niệm cùng bánh sinh nhật" width="734" height="1100" /></div></div><div class="masthead-girl masthead-portrait"><img src="/images/portraits/masthead-cutout.png" alt="Ảnh chân dung trang trí đầu trang" width="533" height="800" /></div><span class="masthead-confetti">✳</span></header>
-      <header class="topbar"><button class="mobile-menu icon-button" aria-label="Mở menu"><Menu :size="21"/></button><div class="breadcrumb"><span>Âm nhạc</span><ChevronRight :size="14"/><b>{{ activeNav }}</b></div><div class="topbar-right"><button v-if="isAdmin" :class="['manage-top-button',{active:activeNav==='Quản lý'}]" @click="navigate(activeNav==='Quản lý'?'Khám phá':'Quản lý')"><Settings2 :size="15"/><span>{{ activeNav==='Quản lý'?'Quay lại nhạc':'Quản lý bài hát' }}</span></button><button v-if="isAdmin" class="upload-top" @click="showUpload = true"><Upload :size="15"/><span>Tải nhạc lên</span></button><a v-if="!session" class="login-top-button" href="/login?redirect=/">Đăng nhập</a><a v-else class="avatar" href="/account" aria-label="Tài khoản" title="Tài khoản">A</a></div></header>
+      <header class="retro-masthead"><div class="masthead-stripes"></div><div class="masthead-logo"><a class="teen-mark" href="/" aria-label="8X Teen — phát hoặc tạm dừng nhạc" @click.prevent="togglePlayback">8X<small>TEEN</small></a></div><span class="masthead-tagline">XUANDIEUCLUB.TK <i>—</i> WEBSITE KẾT NỐI THẾ HỆ <b>8X, 9X, 2K</b></span><div class="masthead-title"><small>THẾ GIỚI GIẢI TRÍ 1.0</small><strong>XuandieuClub.TK</strong><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span></div><div class="masthead-polaroids"><div class="polaroid p-one"><img src="/images/portraits/D65A7652.jpg" alt="Ảnh chân dung cùng gấu bông" width="734" height="1100" /></div><div class="polaroid p-two"><img src="/images/portraits/D65A7603.jpg" alt="Ảnh cận cảnh cùng hai chú gấu bông" width="1100" height="734" /></div><div class="polaroid p-three"><img src="/images/portraits/D65A7749.jpg" alt="Ảnh kỷ niệm cùng bánh sinh nhật" width="734" height="1100" /></div></div><div class="masthead-girl masthead-portrait"><img src="/images/portraits/masthead-cutout.png" alt="Ảnh chân dung trang trí đầu trang" width="533" height="800" /></div><span class="masthead-confetti">✳</span></header>
+      <header class="topbar"><button class="mobile-menu icon-button" aria-label="Mở menu"><Menu :size="21"/></button><div class="breadcrumb"><span>Âm nhạc</span><ChevronRight :size="14"/><b>{{ activeNav }}</b></div><div class="topbar-right"><button v-if="isAdmin" :class="['manage-top-button',{active:activeNav==='Quản lý'}]" @click="navigate(activeNav==='Quản lý'?'Khám phá':'Quản lý')"><Settings2 :size="15"/><span>{{ activeNav==='Quản lý'?'Quay lại nhạc':'Quản lý bài hát' }}</span></button><button v-if="isAdmin" class="upload-top" @click="showUpload = true"><Upload :size="15"/><span>Tải nhạc lên</span></button><a v-if="!session" class="login-top-button" href="/login?redirect=/">Đăng nhập</a><button v-if="session" class="logout-top-button" :disabled="isLoggingOut" @click="logout"><LogOut :size="15"/><span>{{ isLoggingOut ? 'Đang đăng xuất…' : 'Đăng xuất' }}</span></button><a v-if="session" class="avatar" href="/account" aria-label="Tài khoản" title="Tài khoản">A</a></div></header>
       <div class="page-body">
-        <aside class="legacy-left"><section class="legacy-panel"><h3>CHUYÊN MỤC</h3><a v-for="item in ['GÁI XINH  💥','KẾT QUẢ SỐ XỔ','VIDEO  🔥','Lưu bút','Girl Việt Nam','Girl Trung Quốc','Girl Hàn Quốc','Girl Japan','Girl Thái Lan','BIKINI tuyển chọn','Gái cực xinh','Người mẫu ảnh','HOT GIRL','Hằng tuyển','Giải trí','Hình ảnh','Hoài niệm','Thủ thuật game','Thủ thuật hay','Tin tức']" :key="item" href="#music"><b>✚</b> {{ item }}</a></section><section class="legacy-panel"><h3>GÓC KỶ NIỆM</h3><a v-for="item in ['Tình yêu tuổi học trò','Lời muốn nói','Thơ tình','Nhật ký mùa hè','Bạn bè 4 phương']" :key="item" href="#music"><b>☷</b> {{ item }}</a></section><div class="left-sticker">✿<span>thanh xuân<br/><small>ngày ấy</small></span>✿</div></aside>
+        <aside class="legacy-left"><section class="legacy-panel"><h3>CHUYÊN MỤC</h3><a v-for="item in ['GÁI XINH  💥','KẾT QUẢ SỐ XỔ','VIDEO  🔥','Lưu bút','Girl Việt Nam','Girl Trung Quốc','Girl Hàn Quốc','Girl Japan','Girl Thái Lan','BIKINI tuyển chọn','Gái cực xinh','Người mẫu ảnh','HOT GIRL','Hằng tuyển','Giải trí','Hình ảnh','Hoài niệm','Thủ thuật game','Thủ thuật hay','Tin tức']" :key="item" href="#music"><b>✚</b> {{ item }}</a></section><section class="legacy-panel"><h3>GÓC KỶ NIỆM</h3><a v-for="item in ['Tình yêu tuổi học trò','Lời muốn nói','Thơ tình','Nhật ký mùa hè','Bạn bè 4 phương']" :key="item" href="#music"><b>☷</b> {{ item }}</a></section><section class="legacy-panel rapper-panel"><h3>TOP RAPPER</h3><div class="rapper-list"><div v-for="rapper in [{name:'Kyo',image:'kyo'},{name:'Lil Shady',image:'lil-shady'},{name:'Lil Knight',image:'lil-knight'},{name:'Andree',image:'andree'},{name:'Lil Kani',image:'lil-kani'},{name:'Khánh Won',image:'khanh-won'},{name:'Young Uno',image:'young-uno'}]" :key="rapper.name" class="rapper-item"><img :src="`/images/rappers/${rapper.image}.jpg`" :alt="rapper.name" loading="lazy"/><b>{{ rapper.name }}</b></div></div></section><div class="left-sticker">✿<span>thanh xuân<br/><small>ngày ấy</small></span>✿</div></aside>
         <div class="legacy-center">
           <WelcomeSlideshow v-if="activeNav !== 'Quản lý'" />
           <section v-if="activeNav === 'Quản lý'" class="management-panel">
@@ -431,7 +441,7 @@ onMounted(async () => {
           </section>
 
         </div>
-        <aside class="legacy-right"><section class="legacy-panel"><h3>TÌM KIẾM</h3><div class="old-search"><input v-model="query" placeholder="Từ khóa..." @keyup.enter="searchMusic"/><button @click="searchMusic">Tìm kiếm</button></div></section><section class="legacy-panel"><h3>TIVI ONLINE</h3><div class="tv-grid"><button v-for="channel in ['VTV1','VTV2','VTV3','VTV4','VTV5','VTV5 TN','VTV6','VTV7 HD','VTV8','VTV9']" :key="channel" @click="showToast('Kênh ' + channel)"><b>{{ channel }}</b></button></div></section><section class="legacy-panel"><h3>GÓC TIN HỌC</h3><a v-for="item in ['Hướng dẫn làm blog','Tạo avatar Yahoo','Ký tự ALT đẹp','Mặt cười Yahoo','Bảng mã màu','Nick Yahoo độc','Chuyển đổi mã HTML']" :key="item" href="#music"><b>▸</b> {{ item }}</a></section><div class="right-sticker">✿<span>xuân<br/>đã về</span></div></aside>
+        <aside class="legacy-right"><section class="legacy-panel"><h3>TÌM KIẾM</h3><div class="old-search"><input v-model="query" placeholder="Từ khóa..." @keyup.enter="searchMusic"/><button @click="searchMusic">Tìm kiếm</button></div></section><section class="legacy-panel"><h3>TIVI ONLINE</h3><div class="tv-grid"><button v-for="channel in ['VTV1','VTV2','VTV3','VTV4','VTV5','VTV5 TN','VTV6','VTV7 HD','VTV8','VTV9']" :key="channel" @click="showToast('Kênh ' + channel)"><b>{{ channel }}</b></button></div></section><section class="legacy-panel"><h3>GÓC TIN HỌC</h3><a v-for="item in ['Hướng dẫn làm blog','Tạo avatar Yahoo','Ký tự ALT đẹp','Mặt cười Yahoo','Bảng mã màu','Nick Yahoo độc','Chuyển đổi mã HTML']" :key="item" href="#music"><b>▸</b> {{ item }}</a></section><section class="legacy-panel poem-panel"><h3>THƠ VUI</h3><div class="legacy-link-list"><a v-for="poem in ['Cô Hàng Xóm','Thơ Bút Tre','Em Đi Lấy Chồng','Thơ Tình Toán Học','Thơ Tình Kế Toán','Thơ Lập Trình Viên','Bài Thơ Đôi Dép','BLOG của sao']" :key="poem" href="#top"><b>✿</b>{{ poem }}</a></div></section><section class="legacy-panel game-panel"><h3>GAME FLASH</h3><div class="legacy-game-list"><div v-for="game in [{name:'Happy Wheels',image:'happy-wheels'},{name:'Bartender The Right',image:'bartender'},{name:'Duck Life',image:'duck-life'},{name:'Escaping The Prison',image:'prison-escape'},{name:'Murder',image:'murder'},{name:'Jacksmith',image:'jacksmith'},{name:'Hardest Game',image:'hardest-game'},{name:'Bloons Tower Defense',image:'bloons-defense'},{name:'Super Smash Flash 2',image:'smash-flash'},{name:'Fireboy & Watergirl',image:'fireboy-watergirl'},{name:'Age of War',image:'age-of-war'},{name:'Run 3',image:'run-3'}]" :key="game.name" class="legacy-game-item"><img class="legacy-game-thumb" :src="`/images/games/${game.image}.jpg`" :alt="game.name" loading="lazy"/><span>{{ game.name }}</span></div></div></section><div class="right-sticker">✿<span>xuân<br/>đã về</span></div></aside>
       </div>
     </main>
 

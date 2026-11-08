@@ -578,3 +578,191 @@ body{background-color:#b9cd77}
 /* Keep the latest cream and green palette above the legacy responsive rules. */
 @media(min-width:1280px){body{background:#b9cd77!important}.festive-rail{background:#b9cd77!important}}
 .main-content,.retro-masthead,.retro-masthead:after{background-color:#f6f1e6}
+
+/* Nostalgia sidebar panels shown below the computer tips. */
+.poem-panel h3,.game-panel h3{background:#edf2e3;color:#365c32;border-bottom:3px solid #547b3e}
+.legacy-link-list{padding:8px 9px 10px}
+.legacy-link-list a{display:flex;align-items:center;gap:7px;padding:2px 0;color:#3f6b32;font:bold 14px/1.35 Arial,sans-serif}
+.legacy-link-list a:hover{background:#f1f5e9;color:#274f24}
+.legacy-link-list a b{color:#e5689c;font-size:19px;text-shadow:0 1px #f7c1d3}
+.legacy-game-list{max-height:420px;overflow-y:auto;padding:7px 6px;scrollbar-width:thin;scrollbar-color:#a7b98f #f4f2e9}
+.legacy-game-item{min-height:64px;display:flex;align-items:center;gap:7px;color:#3f6b32;font:bold 12px/1.3 Arial,sans-serif;overflow:hidden;transition:background .2s,transform .2s,color .2s}
+.legacy-game-thumb{width:58px;height:58px;flex:0 0 58px;display:block;object-fit:cover;border:1px solid #d9dfcf;background:#e7eadc;box-shadow:0 1px 2px #30432420;transition:transform .24s,filter .24s,box-shadow .24s}
+.legacy-game-item>span{transition:transform .2s,color .2s}
+.legacy-game-item:hover{background:#eff4e7;color:#274f24;transform:translateX(3px)}
+.legacy-game-item:hover .legacy-game-thumb{transform:scale(1.09) rotate(-1deg);filter:saturate(1.16);box-shadow:0 4px 10px #26351d38}
+.legacy-game-item:hover>span{transform:translateX(3px);color:#274f24}
+@media(max-width:760px){.legacy-link-list{padding:5px 4px}.legacy-link-list a{gap:3px;font-size:9px}.legacy-link-list a b{font-size:12px}.legacy-game-list{max-height:260px;padding:4px 3px}.legacy-game-item{min-height:43px;gap:4px;font-size:8px}.legacy-game-thumb{width:36px;height:36px;flex-basis:36px;font-size:20px}}
+
+/* Rapper list below the memory links; keep the youth banner at the rail end. */
+.legacy-left{align-self:stretch}
+.left-sticker{margin-top:auto}
+.rapper-panel h3{background:#edf2e3;color:#365c32;border-bottom:3px solid #547b3e}
+.rapper-list{padding:2px}
+.rapper-item{min-height:90px;display:flex;align-items:center;gap:9px;padding:8px;border-bottom:1px solid #d9d9d5;background:#fdfaf2;overflow:hidden;cursor:pointer;transition:background .2s,transform .2s}
+.rapper-item img{display:block;width:80px;height:80px;flex:0 0 80px;object-fit:cover;transition:transform .25s,filter .25s,box-shadow .25s}
+.rapper-item b{color:#3f6b32;font:bold 16px Arial,sans-serif;transition:color .2s,transform .2s}
+.rapper-item:hover{background:#eff4e7;transform:translateX(3px)}
+.rapper-item:hover img{transform:scale(1.08) rotate(-1deg);filter:saturate(1.12);box-shadow:0 4px 10px #26351d38}
+.rapper-item:hover b{color:#274f24;transform:translateX(3px)}
+@media(max-width:760px){.rapper-item{min-height:55px;gap:5px;padding:5px}.rapper-item img{width:42px;height:42px;flex-basis:42px}.rapper-item b{font-size:10px}.left-sticker{margin-top:auto}}
+@media(prefers-reduced-motion:reduce){.rapper-item,.rapper-item img,.rapper-item b,.legacy-game-item,.legacy-game-item>span,.legacy-game-thumb{transition:none}}
+
+/* Align header actions and keep the 8X wordmark clear of its black caption. */
+.topbar{display:flex;align-items:center}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.manage-top-button,.login-top-button,.upload-top{box-sizing:border-box;height:34px;min-height:34px;margin:0;align-self:center;display:inline-flex;align-items:center;justify-content:center;line-height:1;vertical-align:middle}
+.manage-top-button{white-space:nowrap}
+.masthead-logo{left:clamp(10px,1.2vw,22px);max-width:calc(100% - 260px);align-items:flex-end;gap:11px}
+.teen-mark{position:relative;z-index:2;flex:0 0 auto;white-space:nowrap;line-height:.9}
+.masthead-tagline{position:relative;z-index:1;flex:0 1 420px;min-width:0;max-width:420px;white-space:normal;line-height:1.35;overflow-wrap:anywhere}
+
+/* Matching green and pink floral borders for the music and auth dialogs. */
+.modal-backdrop{box-sizing:border-box;overflow-y:auto;padding:24px clamp(12px,4vw,40px);align-items:center}
+.upload-modal,.music-auth-card{position:relative;isolation:isolate;box-sizing:border-box;width:min(100%,460px);max-height:calc(100dvh - 48px);overflow:auto;margin:0 auto;border:2px solid transparent;border-radius:14px;background:linear-gradient(#fdfaf2,#fdfaf2) padding-box,repeating-linear-gradient(135deg,#477643 0 8px,#e793ad 8px 16px,#f7e3e9 16px 20px) border-box;background-size:auto,220% 220%;background-position:center,0% 50%;animation:modal-border-drift 12s linear infinite;box-shadow:0 22px 80px #292b2030}
+.upload-modal{padding:30px clamp(22px,5vw,34px) 32px}
+.music-auth-card{padding:30px clamp(22px,4vw,34px);background:linear-gradient(#fbfaf6,#fbfaf6) padding-box,repeating-linear-gradient(135deg,#477643 0 8px,#e793ad 8px 16px,#f7e3e9 16px 20px) border-box;background-size:auto,220% 220%;background-position:center,0% 50%}
+.upload-modal:before,.music-auth-card:before{content:"";position:absolute;z-index:0;inset:5px;border:1px dashed #d99aab;border-radius:9px;pointer-events:none}
+.upload-modal>*,.music-auth-card>*{position:relative;z-index:1}
+.modal-header{align-items:center;min-height:35px;gap:14px}
+.modal-header>div{min-width:0}
+.modal-header h2{line-height:1.25}
+.drop-zone,.field-label input,.music-auth-field>input,.music-auth-password>input{box-sizing:border-box;width:100%}
+.music-auth-card{max-width:430px}
+@keyframes modal-border-drift{to{background-position:center,100% 50%}}
+@media(max-width:760px){
+  .masthead-logo{left:8px;bottom:8px;max-width:53%;gap:6px}
+  .masthead-tagline{flex:1 1 0;max-width:calc(100% - 58px);padding:4px 6px;white-space:normal;line-height:1.25}
+  .teen-mark{font-size:clamp(29px,8vw,37px)}
+  .topbar{gap:5px}
+  .topbar-right{gap:4px;min-width:0}
+  .manage-top-button,.login-top-button,.upload-top{height:29px;min-height:29px;padding-inline:7px;font-size:9px}
+  .upload-modal,.music-auth-card{max-height:calc(100dvh - 28px);padding:24px 19px 26px;border-radius:12px}
+  .modal-header h2{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){.upload-modal,.music-auth-card{animation:none}}
+
+/* Two-row masthead: keep the 8X Teen mark above the black caption bar. */
+.retro-masthead{overflow:hidden}
+.masthead-logo{left:22px;top:9px;bottom:auto;width:auto;max-width:calc(100% - 44px);height:126px;align-items:flex-start;gap:0}
+.masthead-logo .teen-mark{font-size:clamp(54px,6vw,82px);line-height:.88;letter-spacing:-7px}
+.masthead-logo .teen-mark small{font-size:.48em;letter-spacing:-1px}
+.masthead-tagline{position:absolute;left:18px;right:18px;bottom:12px;z-index:4;display:block;box-sizing:border-box;width:auto;max-width:none;min-width:0;padding:8px 12px;background:#101010;color:#fff;font:clamp(10px,1.15vw,15px)/1.35 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 5px #2228}
+.masthead-title{right:14%;bottom:58px;z-index:2}
+@media(max-width:760px){
+  .masthead-logo{left:10px;top:3px;bottom:auto;width:auto;max-width:calc(100% - 20px);height:83px}
+  .masthead-logo .teen-mark{font-size:clamp(34px,9vw,52px);letter-spacing:-4px}
+  .masthead-logo .teen-mark small{font-size:.48em;letter-spacing:0}
+  .masthead-tagline{left:7px;right:7px;bottom:5px;padding:5px 7px;font-size:clamp(6px,1.8vw,9px);white-space:normal;line-height:1.2}
+  .masthead-title{display:none}
+  .masthead-polaroids{left:50%;top:10px;transform:scale(.58);transform-origin:top left}
+}
+@media(max-width:460px){.masthead-polaroids{left:58%;transform:scale(.48);gap:2px}}
+
+/* Full retro masthead composition from the latest reference. */
+@media(min-width:761px){
+  .retro-masthead{height:clamp(360px,29vw,560px);margin:0 7px;background:#fff;border-color:#70c52b}
+  .masthead-stripes{top:30%;height:39%;background:repeating-linear-gradient(to bottom,#ffe700 0 30px,#fff 30px 36px,#f2853f 36px 66px,#fff 66px 72px,#f05d57 72px 102px,#fff 102px 108px,#21b9a0 108px 138px,#fff 138px 144px,#469de4 144px 174px,#fff 174px 180px,#9a62a8 180px 210px)}
+  .masthead-stripes:after{left:32%;top:-22%;width:12px;height:150%;background:#fff;border-left:18px solid #8c54a2;border-right:18px solid #36ad9d;box-shadow:30px 0 #efa44b,60px 0 #e45f5a,90px 0 #4099d1,120px 0 #f5d728}
+  .masthead-polaroids{left:18%;top:5%;gap:clamp(4px,.7vw,14px);transform:rotate(-3deg)}
+  .polaroid{width:clamp(104px,10vw,205px);height:clamp(120px,14vw,286px);padding:clamp(6px,.55vw,11px) clamp(6px,.55vw,11px) clamp(18px,1.2vw,26px)}
+  .p-two{width:clamp(126px,13vw,250px);height:clamp(145px,16vw,325px);transform:rotate(4deg) translateY(-8px)}
+  .masthead-logo{left:22px;top:auto;bottom:14%;width:auto;height:auto;max-width:48%;align-items:flex-end}
+  .masthead-logo .teen-mark{font-size:clamp(66px,7.3vw,145px);line-height:.8;letter-spacing:-.075em}
+  .masthead-logo .teen-mark small{font-size:.47em;letter-spacing:-.02em}
+  .masthead-tagline{left:18px;right:48%;bottom:4.5%;width:auto;max-width:none;padding:8px 12px;font-size:clamp(10px,.95vw,17px);white-space:nowrap}
+  .masthead-title{right:13%;bottom:4.5%;width:34%;align-items:center;text-align:center;gap:5px}
+  .masthead-title small{font-size:clamp(13px,1.7vw,31px)}
+  .masthead-title strong{font-size:clamp(25px,3.1vw,59px);letter-spacing:0;white-space:nowrap}
+  .masthead-title span{font-size:clamp(7px,.6vw,11px);letter-spacing:clamp(.5px,.2vw,3px);white-space:nowrap}
+  .masthead-girl.masthead-portrait{right:0;top:auto;bottom:0;width:clamp(145px,16vw,320px);height:98%;z-index:4}
+  .masthead-confetti{left:0;top:54%;font-size:clamp(38px,5vw,92px);color:#155dff;z-index:5}
+}
+
+/* Align the navigation frame with the masthead and content frames. */
+@media(min-width:761px){.main-content>.topbar{width:auto;margin-inline:7px}}
+.logout-top-button{box-sizing:border-box;height:34px;min-height:34px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid #d8e1ce;border-radius:3px;background:#f8fbf4;color:#527343;font:11px Arial,sans-serif;white-space:nowrap}
+.logout-top-button:hover{background:#eaf2e2;border-color:#b6caa7}
+@media(max-width:760px){.main-content>.topbar{margin:0}.logout-top-button{height:29px;min-height:29px;padding:0 6px;gap:3px;font-size:9px}.logout-top-button svg{width:13px;height:13px}}
+
+/* Small floral corner details on the homepage article and feature frames. */
+.page-body :is(.legacy-panel,.hero-card,.search-section,.content-grid,.music-library,.management-panel,.welcome-slideshow){
+  position:relative;
+  border-color:#78a84e;
+  box-shadow:inset 0 0 0 1px #f1bfd0;
+}
+.page-body :is(.legacy-panel,.hero-card,.search-section,.content-grid,.music-library,.management-panel,.welcome-slideshow)::before{
+  content:"";
+  position:absolute;
+  z-index:3;
+  inset:2px;
+  pointer-events:none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c-1-5 1-8 5-11M14 17c-4-2-7-1-9 1' fill='none' stroke='%2376a24b' stroke-width='1.5'/%3E%3Cellipse cx='6' cy='17' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-25 6 17)'/%3E%3Cellipse cx='17' cy='13' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-35 17 13)'/%3E%3Cg fill='%23f294b4'%3E%3Ccircle cx='12' cy='4.5' r='3'/%3E%3Ccircle cx='17.5' cy='8.5' r='3'/%3E%3Ccircle cx='15.5' cy='15' r='3'/%3E%3Ccircle cx='8.5' cy='15' r='3'/%3E%3Ccircle cx='6.5' cy='8.5' r='3'/%3E%3C/g%3E%3Ccircle cx='12' cy='10' r='2.4' fill='%23f6d36c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c-1-5 1-8 5-11M14 17c-4-2-7-1-9 1' fill='none' stroke='%2376a24b' stroke-width='1.5'/%3E%3Cellipse cx='6' cy='17' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-25 6 17)'/%3E%3Cellipse cx='17' cy='13' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-35 17 13)'/%3E%3Cg fill='%23f294b4'%3E%3Ccircle cx='12' cy='4.5' r='3'/%3E%3Ccircle cx='17.5' cy='8.5' r='3'/%3E%3Ccircle cx='15.5' cy='15' r='3'/%3E%3Ccircle cx='8.5' cy='15' r='3'/%3E%3Ccircle cx='6.5' cy='8.5' r='3'/%3E%3C/g%3E%3Ccircle cx='12' cy='10' r='2.4' fill='%23f6d36c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c-1-5 1-8 5-11M14 17c-4-2-7-1-9 1' fill='none' stroke='%2376a24b' stroke-width='1.5'/%3E%3Cellipse cx='6' cy='17' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-25 6 17)'/%3E%3Cellipse cx='17' cy='13' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-35 17 13)'/%3E%3Cg fill='%23f294b4'%3E%3Ccircle cx='12' cy='4.5' r='3'/%3E%3Ccircle cx='17.5' cy='8.5' r='3'/%3E%3Ccircle cx='15.5' cy='15' r='3'/%3E%3Ccircle cx='8.5' cy='15' r='3'/%3E%3Ccircle cx='6.5' cy='8.5' r='3'/%3E%3C/g%3E%3Ccircle cx='12' cy='10' r='2.4' fill='%23f6d36c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c-1-5 1-8 5-11M14 17c-4-2-7-1-9 1' fill='none' stroke='%2376a24b' stroke-width='1.5'/%3E%3Cellipse cx='6' cy='17' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-25 6 17)'/%3E%3Cellipse cx='17' cy='13' rx='3' ry='1.5' fill='%2397c77b' transform='rotate(-35 17 13)'/%3E%3Cg fill='%23f294b4'%3E%3Ccircle cx='12' cy='4.5' r='3'/%3E%3Ccircle cx='17.5' cy='8.5' r='3'/%3E%3Ccircle cx='15.5' cy='15' r='3'/%3E%3Ccircle cx='8.5' cy='15' r='3'/%3E%3Ccircle cx='6.5' cy='8.5' r='3'/%3E%3C/g%3E%3Ccircle cx='12' cy='10' r='2.4' fill='%23f6d36c'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-size:14px 14px;
+  background-position:top left,top right,bottom left,bottom right;
+}
+@media(max-width:760px){
+  .retro-masthead{height:160px;margin:0}
+  .masthead-stripes{top:40px;height:62px}
+  .masthead-stripes:after{left:42%;height:145px;top:-40px;transform:scale(.62);transform-origin:top left}
+  .masthead-polaroids{left:39%;top:7px;gap:3px;transform:scale(.5) rotate(-3deg);transform-origin:top left}
+  .masthead-logo{left:8px;top:7px;bottom:auto;width:auto;height:62px;max-width:43%;gap:0}
+  .masthead-logo .teen-mark{font-size:clamp(29px,8vw,40px);letter-spacing:-.09em}
+  .masthead-logo .teen-mark small{font-size:.47em;letter-spacing:-.02em}
+  .masthead-tagline{left:6px;right:6px;bottom:5px;padding:4px 6px;font-size:6px;line-height:1.2;white-space:nowrap}
+  .masthead-title{display:none}
+  .masthead-portrait{display:none!important}
+  .masthead-confetti{left:0;top:54%;font-size:23px}
+}
+@media(max-width:460px){
+  .retro-masthead{height:145px}
+  .masthead-polaroids{left:42%;transform:scale(.42) rotate(-3deg)}
+  .masthead-logo{max-width:45%}
+  .masthead-tagline{font-size:5px}
+}
+@media(min-width:761px){
+  .masthead-girl.masthead-portrait{right:0;top:auto;bottom:0;width:clamp(170px,16%,320px);max-width:320px;height:98%;z-index:4}
+  .masthead-portrait img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+  .masthead-title{right:clamp(180px,17%,241px);bottom:4.5%;width:clamp(230px,32%,454px)}
+  .masthead-title strong{font-size:clamp(23px,2.2vw,42px);letter-spacing:0;white-space:nowrap}
+  .masthead-tagline{right:50.5%}
+}
+@media(min-width:761px) and (max-width:1100px){.masthead-title{right:24%;width:30%}.masthead-tagline{right:58%}.masthead-title strong{font-size:clamp(22px,3vw,32px)}}
+
+/* Nudge the 8X Teen wordmark down slightly without moving its caption bar. */
+.masthead-logo .teen-mark{transform:translateY(18px)}
+@media(min-width:761px){.masthead-tagline{bottom:2.5%}}
+@media(max-width:760px){.masthead-tagline{bottom:2px}}
+
+/* Calligraphic rainbow treatment for the 8X Teen wordmark. */
+.teen-mark,.teen-mark small{
+  font-family:"Apple Chancery","Brush Script MT","Segoe Script",cursive;
+  font-style:italic;
+  font-weight:700;
+  color:#fff;
+  background-image:linear-gradient(105deg,#ff1767 0%,#b51cff 23%,#244dff 43%,#00aebd 62%,#55a817 78%,#ff8a00 91%,#ff1767 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:.45px #64164f;
+  filter:drop-shadow(1px 2px 1px #28342170);
+}
+@media(min-width:761px){.masthead-logo .teen-mark{font-size:clamp(52px,5.8vw,118px)}}
+@media(max-width:760px){.masthead-logo .teen-mark{font-size:clamp(24px,6.5vw,32px)}}
+
+/* Blue caption strip with a soft blink on its text. */
+.masthead-tagline{background:#1676d2;color:#fff;box-shadow:0 3px 7px #153b6380}
+.masthead-tagline{animation:masthead-caption-text 1.25s ease-in-out infinite alternate}
+@keyframes masthead-caption-text{from{color:#fff;text-shadow:0 0 0 #fff0}to{color:#cde7ff;text-shadow:0 0 8px #fff}}
+@media(prefers-reduced-motion:reduce){.masthead-tagline,.masthead-tagline>*{animation:none}}
+@media(min-width:761px){
+  .masthead-title{gap:3px;line-height:1.05;color:#1268bd}
+  .masthead-title small{font-size:clamp(12px,1.25vw,23px);color:#1268bd;letter-spacing:.04em}
+  .masthead-title strong{font-size:clamp(20px,2vw,36px);line-height:1.05;letter-spacing:-.025em;color:#0759ad;text-shadow:0 1px 0 #fff}
+  .masthead-title span{font-size:clamp(7px,.58vw,10px);line-height:1.2;letter-spacing:clamp(.4px,.12vw,1.5px);color:#287ac2}
+}

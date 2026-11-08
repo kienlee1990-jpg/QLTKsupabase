@@ -19,7 +19,7 @@ async function submit() {
   try {
     await auth.signIn(email.value, password.value)
     const redirect = router.currentRoute.value.query.redirect
-    const destination = typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/account'
+    const destination = typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/'
     await router.replace(destination)
   } catch (e) { error.value = errorMessage(e) }
   finally { busy.value = false }

@@ -176,28 +176,25 @@ body{background:#b9cd77}
 .library-note i{background:#557d40}
 .music-empty{background:#f8f6ef}
 .empty-music-icon{background:#e7eddd;color:#456b39}
-.music-memory-section{margin-top:26px;border:1px solid #6b8d4b;background:#fdfaf2}
-.music-memory-heading{padding:18px 20px 15px;text-align:center;background:#edf2e3;border-bottom:2px solid #547b3e}
-.music-memory-heading>span{font:8px var(--mono);letter-spacing:1.5px;color:#547548}
-.music-memory-heading h2{margin-top:5px;color:#365c32;font:600 19px 'Playfair Display',serif}
-.music-memory-heading p{margin-top:5px;color:#7d8571;font-size:10px}
-.memory-song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 12px}
-.memory-song-card{position:relative;min-width:0;min-height:103px;display:grid;grid-template-columns:88px minmax(0,1fr) 32px;align-items:start;gap:10px;padding:11px 8px;border:0;border-bottom:1px dotted #d9ddce;background:transparent;text-align:left;transition:background .2s,transform .2s}
-.memory-song-card:hover{background:#f0f3e8;transform:translateY(-2px)}
-.memory-song-art{width:80px;height:80px;object-fit:cover;background:#e4e8d9}
-.memory-song-copy{min-width:0;display:grid;gap:6px;padding-top:3px}
-.memory-song-copy b{color:#3f6337;font-size:13px;line-height:1.5}
-.memory-song-copy small{color:#858779;font-size:10px}
-.memory-song-action{width:29px;height:29px;display:grid;place-items:center;border:1px solid #d5dfc8;border-radius:50%;background:#f8faF3;color:#456b39}
-.memory-song-empty{padding:24px;text-align:center;color:#888b7a;font-size:11px}
-.memory-photo-strip{display:flex;gap:7px;overflow-x:auto;padding:14px 16px 18px;border-top:1px solid #ebe9df;scrollbar-width:thin;scrollbar-color:#9eb180 #f1f0e7}
-.memory-photo-strip img{width:calc((100% - 21px)/4);min-width:90px;height:112px;object-fit:cover;padding:4px;background:#fff;border:1px solid #dcdccd;box-shadow:0 2px 5px #34422c18;transition:transform .22s}
-.memory-photo-strip img:nth-child(even){transform:translateY(4px) rotate(1deg)}
-.memory-photo-strip img:hover{transform:translateY(-3px) rotate(0) scale(1.03)}
-.music-memory-footer{padding:13px 16px 15px;text-align:center;background:#f2f1e7;color:#71805e}
-.music-memory-footer span{font:8px var(--mono);letter-spacing:1.1px;color:#4d713d}
-.music-memory-footer p{margin-top:5px;font-size:10px}
-@media(max-width:760px){.music-memory-section{margin-top:15px}.music-memory-heading{padding:14px 10px}.music-memory-heading h2{font-size:16px}.memory-song-grid{grid-template-columns:1fr;padding:5px 8px}.memory-song-card{min-height:76px;grid-template-columns:62px minmax(0,1fr) 28px;padding:8px 4px;align-items:center}.memory-song-art{width:56px;height:56px}.memory-song-copy{gap:3px;padding:0}.memory-song-copy b{font-size:11px}.memory-song-copy small{font-size:9px}.memory-photo-strip{gap:5px;padding:10px 8px 13px}.memory-photo-strip img{width:calc((100% - 15px)/4);min-width:66px;height:90px;padding:3px}.music-memory-footer{padding:11px 8px}.music-memory-footer p{font-size:9px}}
+.music-legacy-content{display:grid;gap:18px;margin-top:24px}
+.legacy-gallery,.legacy-articles{border:1px solid #6b8d4b;background:#fdfaf2}
+.legacy-gallery h2,.legacy-articles h2{margin:0;padding:12px 8px;text-align:center;background:#edf2e3;border-bottom:3px solid #547b3e;color:#365c32;font:bold 17px Arial,sans-serif}
+.legacy-gallery-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;padding:12px}
+.legacy-gallery-grid img{display:block;width:100%;height:180px;object-fit:cover;border:1px solid #dedccd;background:#f4f1e8;transition:transform .25s,box-shadow .25s}
+.legacy-gallery-grid img:hover{z-index:1;transform:scale(1.035);box-shadow:0 7px 18px #26351d35}
+.legacy-article-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:0 10px}
+.legacy-article{min-width:0;min-height:126px;display:grid;grid-template-columns:112px minmax(0,1fr);align-items:start;gap:11px;padding:13px 7px;border-bottom:1px dotted #cfd4c8}
+.legacy-article img{display:block;width:108px;height:102px;object-fit:cover;background:#e8e7dc}
+.legacy-article h3{color:#3f6b32;font:bold 15px/1.5 Arial,sans-serif}
+.site-footer{position:relative;overflow:hidden;margin-top:20px;padding:24px 18px 26px;text-align:center;background:#e8ebd9;border-top:2px solid #6b8d4b;color:#67745b}
+.site-footer:before,.site-footer:after{content:'✿  ✳  ❀';position:absolute;bottom:10px;color:#b8c58f;font:28px Georgia,serif;opacity:.65}
+.site-footer:before{left:12px}.site-footer:after{right:12px;transform:scaleX(-1)}
+.site-footer nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px}
+.site-footer nav a{color:#3f6337;font-size:11px;font-weight:600}
+.site-footer p{margin:13px 0 5px;font-size:11px}
+.site-footer p strong{color:#365c32}
+.site-footer small{color:#828775;font-size:9px}
+@media(max-width:760px){.music-legacy-content{gap:12px;margin-top:14px}.legacy-gallery h2,.legacy-articles h2{padding:9px 5px;font-size:13px}.legacy-gallery-grid{gap:4px;padding:7px}.legacy-gallery-grid img{height:105px}.legacy-article-grid{grid-template-columns:1fr;padding:0 5px}.legacy-article{min-height:78px;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:8px 3px}.legacy-article img{width:70px;height:68px}.legacy-article h3{font-size:11px;line-height:1.45}.site-footer{margin-top:14px;padding:18px 10px 22px}.site-footer:before,.site-footer:after{font-size:17px}.site-footer nav{gap:6px 13px}.site-footer nav a{font-size:9px}.site-footer p{font-size:9px}.site-footer small{font-size:8px}}
 
 /* Warm ivory surfaces with a slightly deeper leaf-green accent. */
 :root{--green:#3f6337;--paper:#f8f6ef;--lime:#92ae61}

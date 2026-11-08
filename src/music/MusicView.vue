@@ -47,6 +47,22 @@ let soundcloudApiPromise = null
 let soundcloudWidget = null
 let metadataTimer = null
 let metadataRequestId = 0
+const recentArticles = [
+  { title: 'Hoangclub và Sonhai.info: thế giới âm nhạc của thế hệ 8X, 9X', image: '/images/slideshow/memory-01.jpg' },
+  { title: 'CS 1.1: Tượng đài bất tử trong lòng thế hệ game thủ', image: '/images/slideshow/memory-02.jpg' },
+  { title: 'Hồi ức về những cỗ máy ghi đĩa DVD/VCD huyền thoại một thời', image: '/images/slideshow/memory-03.jpg' },
+  { title: 'Zing Me: Một thời rực rỡ và miền ký ức khó quên của thế hệ 8X, 9X', image: '/images/slideshow/memory-04.jpg' },
+  { title: 'Tiến hóa hay là… “tối hóa”?', image: '/images/slideshow/memory-05.jpg' },
+  { title: 'Những món đồ học tập huyền thoại của thế hệ 8X, 9X', image: '/images/slideshow/memory-06.jpg' },
+  { title: 'XoneFM: Ký ức âm nhạc không thể quên của giới trẻ', image: '/images/slideshow/memory-07.jpg' },
+  { title: 'Yahoo Messenger và những cuộc trò chuyện không hồi kết', image: '/images/portraits/D65A7670.jpg' },
+]
+const galleryPhotos = [
+  { src: '/images/portraits/D65A7652.jpg', alt: 'Khoảnh khắc tuổi trẻ 1' },
+  { src: '/images/portraits/D65A7603.jpg', alt: 'Khoảnh khắc tuổi trẻ 2' },
+  { src: '/images/portraits/D65A7749.jpg', alt: 'Khoảnh khắc tuổi trẻ 3' },
+  { src: '/images/portraits/D65A7670.jpg', alt: 'Khoảnh khắc tuổi trẻ 4' },
+]
 
 const isAdmin = auth.isAdmin
 const session = auth.session
@@ -430,27 +446,32 @@ onMounted(async () => {
             </section>
             <audio ref="audio" @timeupdate="currentTime = audio?.currentTime || 0" @loadedmetadata="handleLoadedMetadata" @play="isPlaying = true" @pause="isPlaying = false" @ended="handleEnded" />
           </section>
-          <section v-if="activeNav !== 'Quản lý'" class="music-memory-section">
-            <header class="music-memory-heading"><span>GIAI ĐIỆU THANH XUÂN</span><h2>Nghe lại những bài hát yêu thích</h2><p>Chọn một giai điệu để phát ngay trong trình nghe nhạc.</p></header>
-            <div v-if="visibleSongs.length" class="memory-song-grid">
-              <button v-for="song in visibleSongs.slice(0, 8)" :key="song.id" class="memory-song-card" @click="playSong(song)">
-                <SongArtwork class="memory-song-art" :song="song" />
-                <span class="memory-song-copy"><b>{{ song.title }}</b><small>{{ song.artist }}</small></span>
-                <span class="memory-song-action"><Pause v-if="activeSong?.id===song.id && isPlaying" :size="16" fill="currentColor"/><Play v-else :size="16" fill="currentColor"/></span>
-              </button>
-            </div>
-            <div v-else class="memory-song-empty">Bài hát đã lưu sẽ xuất hiện ở đây.</div>
-            <div class="memory-photo-strip" aria-label="Khoảnh khắc thanh xuân">
-              <img src="/images/portraits/D65A7652.jpg" alt="Khoảnh khắc thanh xuân 1" loading="lazy" />
-              <img src="/images/portraits/D65A7603.jpg" alt="Khoảnh khắc thanh xuân 2" loading="lazy" />
-              <img src="/images/portraits/D65A7749.jpg" alt="Khoảnh khắc thanh xuân 3" loading="lazy" />
-              <img src="/images/portraits/D65A7670.jpg" alt="Khoảnh khắc thanh xuân 4" loading="lazy" />
-            </div>
-            <footer class="music-memory-footer"><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span><p>Giữ lại những giai điệu đẹp của một thời thanh xuân.</p></footer>
+          <section v-if="activeNav !== 'Quản lý'" class="music-legacy-content">
+            <section class="legacy-gallery">
+              <h2>GIRL XINH 8X, 9X</h2>
+              <div class="legacy-gallery-grid">
+                <img v-for="photo in galleryPhotos" :key="photo.src" :src="photo.src" :alt="photo.alt" loading="lazy" />
+              </div>
+            </section>
+            <section class="legacy-articles">
+              <h2>BÀI VIẾT MỚI</h2>
+              <div class="legacy-article-grid">
+                <article v-for="article in recentArticles" :key="article.title" class="legacy-article">
+                  <img :src="article.image" :alt="''" loading="lazy" />
+                  <h3>{{ article.title }}</h3>
+                </article>
+              </div>
+            </section>
           </section>
         </div>
         <aside class="legacy-right"><section class="legacy-panel"><h3>TÌM KIẾM</h3><div class="old-search"><input v-model="query" placeholder="Từ khóa..." @keyup.enter="searchMusic"/><button @click="searchMusic">Tìm kiếm</button></div></section><section class="legacy-panel"><h3>TIVI ONLINE</h3><div class="tv-grid"><button v-for="channel in ['VTV1','VTV2','VTV3','VTV4','VTV5','VTV5 TN','VTV6','VTV7 HD','VTV8','VTV9']" :key="channel" @click="showToast('Kênh ' + channel)"><b>{{ channel }}</b></button></div></section><section class="legacy-panel"><h3>GÓC TIN HỌC</h3><a v-for="item in ['Hướng dẫn làm blog','Tạo avatar Yahoo','Ký tự ALT đẹp','Mặt cười Yahoo','Bảng mã màu','Nick Yahoo độc','Chuyển đổi mã HTML']" :key="item" href="#music"><b>▸</b> {{ item }}</a></section><div class="right-sticker">✿<span>xuân<br/>đã về</span></div></aside>
       </div>
+      <footer class="site-footer">
+        <div class="site-footer-flower" aria-hidden="true">✿</div>
+        <nav aria-label="Liên kết cuối trang"><a href="#top">Trang chủ</a><a href="#top">Âm nhạc</a><a href="#top">Kỷ niệm</a><a href="#top">Liên hệ</a></nav>
+        <p><strong>Xuandieumusic</strong> · Nơi lưu giữ giai điệu và ký ức thanh xuân.</p>
+        <small>© 2026 Xuandieumusic. Chúc bạn có những phút giây nghe nhạc vui vẻ.</small>
+      </footer>
     </main>
 
 

@@ -344,13 +344,13 @@ onMounted(async () => {
   <div class="app-shell">
     <div class="fireworks-overlay" aria-hidden="true"><i class="firework-burst burst-one"></i><i class="firework-burst burst-two"></i><i class="firework-burst burst-three"></i><i class="firework-burst burst-four"></i></div>
     <aside class="festive-rail festive-rail-left" aria-hidden="true">
-      <img class="blossom-photo blossom-photo-left" src="/images/tet-blossoms-left.png" alt="" />
+      <img class="blossom-photo blossom-photo-left" src="/images/tet-blossoms-left-transparent.png" alt="" />
       <div class="couplet couplet-left"><span>Năm</span><span>Mới</span><span>Hạnh</span><span>Phúc</span><span>Bình</span><span>An</span><span>Đến</span><small>✿</small></div>
       <div class="banner-tassels"><i></i><i></i><b>福</b><b>福</b></div>
       <div class="rail-firework firework-left">✳</div>
     </aside>
     <aside class="festive-rail festive-rail-right" aria-hidden="true">
-      <img class="blossom-photo blossom-photo-right" src="/images/tet-blossoms.png" alt="" />
+      <img class="blossom-photo blossom-photo-right" src="/images/tet-blossoms-transparent.png" alt="" />
       <div class="couplet couplet-right"><span>Ngày</span><span>Xuân</span><span>Vĩnh</span><span>Hoa</span><span>Phú</span><span>Quý</span><span>Về</span><small>✿</small></div>
       <div class="banner-tassels"><i></i><i></i><b>福</b><b>福</b></div>
       <div class="rail-firework firework-right">✳</div>

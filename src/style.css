@@ -766,3 +766,36 @@ body{background-color:#b9cd77}
   .masthead-title strong{font-size:clamp(20px,2vw,36px);line-height:1.05;letter-spacing:-.025em;color:#0759ad;text-shadow:0 1px 0 #fff}
   .masthead-title span{font-size:clamp(7px,.58vw,10px);line-height:1.2;letter-spacing:clamp(.4px,.12vw,1.5px);color:#287ac2}
 }
+
+/* Replace the original green Lunar New Year side rails with a starry blue field. */
+body{background:#06183f!important;background-image:radial-gradient(1.5px 1.5px at 14% 23%,#fff 55%,transparent 75%),radial-gradient(1px 1px at 73% 67%,#e1f1ff 55%,transparent 75%),radial-gradient(ellipse at 50% 10%,#174889 0%,#0b285d 42%,#06183f 100%)!important;background-size:83px 97px,127px 113px,100% 100%!important;background-attachment:fixed!important}
+@media(min-width:1280px){
+  .festive-rail{background-color:#06183f!important;background-image:radial-gradient(1.5px 1.5px at 18% 24%,#fff 58%,transparent 76%),radial-gradient(1px 1px at 73% 71%,#dceeff 55%,transparent 75%),radial-gradient(ellipse at 50% 40%,#1b4b8d 0%,#06183f 78%)!important;background-size:79px 91px,113px 107px,100% 100%!important;background-position:0 0,0 0,center!important;animation:blue-rail-glimmer 8s ease-in-out infinite alternate}
+}
+@keyframes blue-rail-glimmer{to{background-position:10px 7px,-8px 11px,center}}
+@media(prefers-reduced-motion:reduce){.festive-rail{animation:none!important}}
+.page-body :is(section,article,.hero-card,.content-grid,.music-library,.welcome-slideshow,.management-panel){border-color:#0b2c70!important}
+
+/* Soft, bright ocean-blue rails with white glints, matching the supplied reference. */
+body{
+  background:#a8d8f2!important;
+  background-image:
+    radial-gradient(2px 2px at 14% 23%,#fff 55%,transparent 78%),
+    radial-gradient(1.5px 1.5px at 73% 67%,#f6fdff 55%,transparent 78%),
+    radial-gradient(ellipse at 50% 0%,#e5f8ff 0%,#afdff4 50%,#8dc8e9 100%)!important;
+  background-size:83px 97px,127px 113px,100% 100%!important;
+  background-attachment:fixed!important;
+}
+@media(min-width:1280px){
+  .festive-rail{
+    background-color:#9bd2ee!important;
+    background-image:
+      radial-gradient(3px 3px at 18% 24%,#fff 48%,#ffffff70 62%,transparent 78%),
+      radial-gradient(2px 2px at 73% 71%,#fff 45%,#ffffff88 60%,transparent 78%),
+      radial-gradient(ellipse at 48% 28%,#dff6ff 0%,#addcf1 45%,#82c1e4 100%),
+      repeating-linear-gradient(176deg,transparent 0 38px,#ffffff14 39px 41px)!important;
+    background-size:79px 91px,113px 107px,100% 100%,100% 100%!important;
+    background-position:0 0,0 0,center,center!important;
+    animation:none!important;
+  }
+}

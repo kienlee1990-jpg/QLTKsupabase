@@ -15,7 +15,12 @@ const router = useRouter()
 async function submit() {
   busy.value = true
   error.value = ''
-  try { await auth.signIn(email.value, password.value); await router.replace('/account') }
+  try {
+    await auth.signIn(email.value, password.value)
+    const redirect = router.currentRoute.value.query.redirect
+    const destination = typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/account'
+    await router.replace(destination)
+  }
   catch (e) { error.value = errorMessage(e) }
   finally { busy.value = false }
 }

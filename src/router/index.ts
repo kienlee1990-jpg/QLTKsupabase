@@ -24,7 +24,10 @@ export const router = createRouter({
 router.beforeEach(async to => {
   try { await auth.init() } catch { return to.name === 'login' ? true : { name: 'login' } }
   if (to.meta.requiresAuth && !auth.session.value) return { name: 'login' }
-  if (to.name === 'login' && auth.session.value) return { name: 'account' }
+  if (to.name === 'login' && auth.session.value) {
+    const redirect = typeof to.query.redirect === 'string' && to.query.redirect.startsWith('/') && !to.query.redirect.startsWith('//') ? to.query.redirect : '/account'
+    return redirect
+  }
   if (to.meta.admin) {
     await auth.loadProfile()
     if (!auth.isAdmin.value) return { name: 'account' }

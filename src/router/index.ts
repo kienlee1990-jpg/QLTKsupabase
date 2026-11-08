@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { auth } from '../stores/auth'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import MusicAuthLayout from '../components/MusicAuthLayout.vue'
 import AppShell from '../components/AppShell.vue'
 import ProfileView from '../views/ProfileView.vue'
 import SecurityView from '../views/SecurityView.vue'
@@ -11,7 +13,8 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'music', component: MusicView },
-    { path: '/login', name: 'login', component: LoginView },
+    { path: '/login', component: MusicAuthLayout, children: [{ path: '', name: 'login', component: LoginView }] },
+    { path: '/register', component: MusicAuthLayout, children: [{ path: '', name: 'register', component: RegisterView }] },
     { path: '/account', component: AppShell, meta: { requiresAuth: true }, children: [
       { path: '', name: 'account', component: ProfileView },
       { path: '/security', name: 'security', component: SecurityView },

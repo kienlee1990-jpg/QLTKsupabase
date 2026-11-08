@@ -9,6 +9,8 @@ export function errorMessage(error: unknown): string {
   const message = typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
     ? error.message : 'Đã có lỗi xảy ra. Vui lòng thử lại.'
   if (/Invalid login credentials/i.test(message)) return 'Email hoặc mật khẩu không chính xác.'
+  if (/User already registered|already been registered/i.test(message)) return 'Email này đã được đăng ký.'
+  if (/signups? not allowed|signup is disabled/i.test(message)) return 'Đăng ký đang bị tắt trong Supabase. Hãy bật Allow new users to sign up trong Authentication → Settings.'
   if (/Email not confirmed/i.test(message)) return 'Vui lòng xác nhận email trước khi đăng nhập.'
   if (/same password/i.test(message)) return 'Mật khẩu mới phải khác mật khẩu hiện tại.'
   if (/fetch|network/i.test(message)) return 'Không thể kết nối. Vui lòng kiểm tra mạng và cấu hình Supabase.'

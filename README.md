@@ -1,6 +1,6 @@
 # Giai Điệu Thanh Xuân — Vue + Supabase
 
-Ứng dụng nghe nhạc tiếng Việt, xây dựng từ giao diện Giai Điệu Thanh Xuân. Trang nghe nhạc công khai; Supabase lưu thư viện, playlist và file âm thanh. Quản trị viên đăng nhập để tải nhạc, thêm link, sửa/ẩn/xóa bài hát. Khu vực hồ sơ và quản lý tài khoản vẫn có tại `/login`, `/account`, `/security` và `/users`.
+Ứng dụng nghe nhạc tiếng Việt, xây dựng từ giao diện Giai Điệu Thanh Xuân. Trang nghe nhạc công khai; Supabase lưu thư viện, playlist và file âm thanh. Quản trị viên đăng nhập để tải nhạc, thêm link, sửa/ẩn/xóa bài hát. Đăng nhập và đăng ký tại `/login` và `/register`; khu vực hồ sơ và quản lý tài khoản tại `/account`, `/security` và `/users`.
 
 **Kiến trúc:** Vue 3 + TypeScript + Vite → Supabase Auth / PostgreSQL / Storage. Không cần ASP.NET hoặc SQLite backend. Các lời gọi Supabase được tập trung trong `src/services` và `src/stores`.
 
@@ -66,7 +66,7 @@ Các tài khoản mới mặc định là `user`. Không có mật khẩu hay t�
 
 Trong Authentication → cấu hình email/password:
 
-- Tắt **Allow new users to sign up** nếu chỉ cấp tài khoản qua quản trị viên. Ứng dụng không có màn hình đăng ký, nhưng cần tắt đăng ký tại Supabase để chặn gọi API trực tiếp.
+- Bật **Allow new users to sign up** để cho phép khách tự đăng ký tại `/register`; tài khoản mới mặc định có vai trò `user`. Nếu chỉ muốn quản trị viên tạo tài khoản, hãy tắt tùy chọn này; form sẽ báo khi Supabase từ chối đăng ký.
 - Đặt độ dài mật khẩu tối thiểu 8, yêu cầu chữ và số. Kiểm tra frontend hỗ trợ trải nghiệm nhập liệu; chính sách Supabase mới là phần thực thi trên server.
 - Đặt Site URL theo địa chỉ ứng dụng, ví dụ `http://127.0.0.1:5173` khi phát triển.
 

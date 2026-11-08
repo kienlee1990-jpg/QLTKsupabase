@@ -74,6 +74,18 @@ async function signIn(email: string, password: string) {
   await loadProfile()
 }
 
+async function signUp(email: string, password: string, fullName: string) {
+  const { data, error } = await api().auth.signUp({
+    email: email.trim(),
+    password,
+    options: { data: { full_name: fullName.trim() } },
+  })
+  if (error) throw error
+  session.value = data.session
+  if (data.session) await loadProfile()
+  return { email: email.trim(), confirmationRequired: !data.session }
+}
+
 async function signOut() {
   const { error } = await api().auth.signOut({ scope: 'local' })
   if (error) throw error
@@ -86,5 +98,5 @@ async function signOut() {
 export const auth = {
   session, profile, loading, profileError,
   isAdmin: computed(() => profile.value?.role === 'admin'),
-  init, signIn, signOut, loadProfile,
+  init, signIn, signUp, signOut, loadProfile,
 }

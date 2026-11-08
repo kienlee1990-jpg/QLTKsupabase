@@ -207,6 +207,63 @@ body{background:#c5df81;min-width:360px;background-image:radial-gradient(#f2e89a
   .management-table-head span:nth-child(n+2),.management-duration,.management-status{display:none}
   .management-actions{justify-content:flex-end}
 }
+
+.music-auth-layout{min-height:100dvh;display:grid;grid-template-columns:minmax(340px,.88fr) minmax(440px,1.12fr);background:#fbfaf6;color:#30372e;font-family:'DM Sans',sans-serif}
+.music-auth-story{position:relative;min-height:100dvh;overflow:hidden;padding:35px clamp(28px,5vw,76px) 26px;background:linear-gradient(145deg,#263e32 0%,#36533b 52%,#556a45 100%);color:#f8f3e6;display:flex;flex-direction:column}
+.music-auth-story:before,.music-auth-story:after{content:'';position:absolute;border:1px solid #e1d9b21b;border-radius:50%;pointer-events:none}
+.music-auth-story:before{width:560px;height:560px;right:-290px;top:-260px}
+.music-auth-story:after{width:430px;height:430px;right:-225px;top:-195px}
+.music-auth-brand{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;width:max-content;color:#fff8e8;font:20px var(--serif);letter-spacing:.1px}
+.music-auth-brand-mark{width:41px;height:41px;border:1px solid #d8d1a450;border-radius:14px 14px 14px 4px;background:#ffffff12;color:#ead69a;display:grid;place-items:center}
+.music-auth-brand small{display:block;margin-top:4px;color:#c6c9a6;font:8px var(--mono);letter-spacing:1.6px}
+.music-auth-copy{position:relative;z-index:1;margin:auto 0;padding:55px 0 24px}
+.music-auth-kicker{display:flex;align-items:center;gap:9px;color:#c5c9a8;font:8px var(--mono);letter-spacing:1.3px}
+.music-auth-kicker i{width:17px;height:1px;background:#d5c48b}
+.music-auth-story h1{margin:23px 0 15px;color:#fff9ed;font:500 clamp(38px,4.1vw,60px)/1.12 var(--serif);letter-spacing:-1.8px}
+.music-auth-story h1 em{color:#e5d49a;font-weight:500}
+.music-auth-story .music-auth-copy>p{color:#d2d7c6;font-size:12px;line-height:1.9}
+.music-auth-record{position:relative;display:grid;place-items:center;width:min(100%,360px);height:270px;margin:19px 0 0 3px}
+.music-auth-record:before{content:'';position:absolute;inset:3px 42px 0;border:1px solid #e4dab22c;border-radius:50%;transform:rotate(-18deg)}
+.music-auth-record:after{content:'';position:absolute;inset:27px 66px 24px;border:1px solid #e4dab226;border-radius:50%;transform:rotate(-18deg)}
+.music-auth-vinyl{position:relative;width:190px;height:190px;border-radius:50%;display:grid;place-items:center;background:repeating-radial-gradient(circle at center,#222a24 0,#222a24 2px,#30362e 3px,#282f28 4px);box-shadow:0 22px 45px #14211960;transform:rotate(-14deg)}
+.music-auth-vinyl:before{content:'';position:absolute;inset:14px;border:1px solid #ffffff13;border-radius:50%}
+.music-auth-vinyl span{width:59px;height:59px;border-radius:50%;display:grid;place-items:center;background:#b57b58;color:#f8e8c0;box-shadow:0 0 0 6px #d7c98e1a}
+.music-auth-vinyl span:after{content:'';position:absolute;width:7px;height:7px;border-radius:50%;background:#25332a}
+.music-auth-record>small{position:absolute;bottom:4px;color:#c8c6a7;font:7px var(--mono);letter-spacing:1.5px}
+.record-spark{position:absolute;color:#dfca84;font-style:normal}.spark-one{left:25px;top:37px;font-size:22px}.spark-two{right:31px;bottom:69px;font-size:18px}
+.music-auth-footer{position:relative;z-index:1;color:#bbc7ad;font:8px var(--mono);letter-spacing:.45px}
+.music-auth-main{min-width:0;min-height:100dvh;display:grid;place-items:center;padding:42px clamp(22px,5vw,76px);overflow:auto}
+.music-auth-card{width:min(100%,405px);margin:auto;padding:13px 0 8px}
+.music-register-card{width:min(100%,430px)}
+.music-auth-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:32px;color:#8f927f;font-size:10px;transition:color .16s}
+.music-auth-back:hover{color:#536844}
+.music-auth-icon{display:grid;place-items:center;width:46px;height:46px;margin-bottom:22px;border:1px solid #e2e5d8;background:#eef0e5;color:#6e8052;border-radius:15px 15px 15px 4px}
+.music-auth-eyebrow{display:block;color:#8c9278;font:8px var(--mono);letter-spacing:1.35px}
+.music-auth-card h2{margin-top:8px;color:#363b30;font:500 31px/1.2 var(--serif);letter-spacing:-.45px}
+.music-auth-intro{margin:9px 0 25px;color:#939386;font-size:11px;line-height:1.75}
+.music-auth-form{display:grid;gap:15px}
+.music-auth-field{display:grid;gap:7px;color:#676b5c;font-size:10px;font-weight:500}
+.music-auth-field>input,.music-auth-password>input{height:43px;border:1px solid #e4e5dc;border-radius:4px;background:#fffefa;padding:0 12px;color:#353b30;font:11px 'DM Sans',sans-serif;letter-spacing:0;transition:border-color .16s,box-shadow .16s}
+.music-auth-field>input:focus,.music-auth-password>input:focus{border-color:#96a77c;box-shadow:0 0 0 3px #83946c18;outline:0}
+.music-auth-field>input::placeholder,.music-auth-password>input::placeholder{color:#b4b4a9}
+.music-auth-password{position:relative;display:block}
+.music-auth-password>input{width:100%;padding-right:43px}
+.music-auth-password>button{position:absolute;right:5px;top:5px;width:33px;height:33px;display:grid;place-items:center;border:0;background:transparent;color:#9b9d8f}
+.music-auth-submit{width:100%;height:45px;margin-top:4px;padding:0 14px 0 17px;display:flex;align-items:center;justify-content:space-between;border:0;border-radius:3px;background:#637b4e;color:#fffdf3;font-size:11px;font-weight:500;transition:background .16s,transform .16s}
+.music-auth-submit:hover:not(:disabled){background:#4c673c;transform:translateY(-1px)}
+.music-auth-submit:disabled{opacity:.58;cursor:not-allowed}
+.music-auth-card .message{margin:0;font-size:10px}
+.music-auth-switch{margin:19px 0 26px;text-align:center;color:#959588;font-size:10px}
+.music-auth-switch a{color:#587343;font-weight:600;text-decoration:underline;text-decoration-color:#aeb99b;text-underline-offset:3px}
+.music-auth-safe{display:flex;align-items:center;justify-content:center;gap:7px;border-top:1px solid #e9e9df;padding-top:17px;color:#a0a194;font-size:9px}
+.music-auth-safe svg{color:#81946a}
+.music-auth-success{display:flex;gap:11px;align-items:flex-start;padding:12px 13px;margin:0 0 16px;border:1px solid #d8e5d0;border-radius:5px;background:#f0f5e9;color:#597344}
+.music-auth-success>svg{flex:none;margin-top:1px}
+.music-auth-success b,.music-auth-success small{display:block}
+.music-auth-success b{font-size:10px;font-weight:600}
+.music-auth-success small{margin-top:4px;color:#78866b;font-size:9px;line-height:1.6}
+@media(max-width:850px){.music-auth-layout{grid-template-columns:minmax(285px,.82fr) minmax(390px,1.18fr)}.music-auth-story{padding:28px 30px 22px}.music-auth-record{height:235px}.music-auth-vinyl{width:165px;height:165px}.music-auth-main{padding:30px 26px}}
+@media(max-width:680px){.music-auth-layout{display:flex;flex-direction:column}.music-auth-story{min-height:218px;padding:18px 22px 19px}.music-auth-brand{font-size:17px}.music-auth-brand-mark{width:35px;height:35px}.music-auth-copy{margin:24px 0 0;padding:0}.music-auth-kicker{font-size:7px}.music-auth-story h1{margin:12px 0 7px;font-size:31px;line-height:1.05}.music-auth-story .music-auth-copy>p{font-size:9px;line-height:1.55}.music-auth-record,.music-auth-footer{display:none}.music-auth-main{min-height:calc(100dvh - 218px);padding:26px 22px 36px;align-items:start}.music-auth-card{max-width:430px;padding-top:0}.music-auth-back{margin-bottom:23px}.music-auth-card h2{font-size:28px}.music-register-card .music-auth-form{gap:12px}}
 @media(max-width:760px){@container (max-width:700px){.management-table-head,.management-row{grid-template-columns:32px minmax(0,1fr) 158px;gap:6px}}}
 @container (max-width:390px){
   .management-table-head,.management-row{grid-template-columns:28px minmax(0,1fr);gap:5px;padding:0 3px}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="paper" x2="1" y2="1"><stop stop-color="#cbd9b4"/><stop offset="1" stop-color="#7e9b71"/></linearGradient>
+    <radialGradient id="record"><stop stop-color="#485449"/><stop offset="1" stop-color="#25352d"/></radialGradient>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h160v160H0z"/>
+  <path fill="#e9eed9" opacity=".45" d="M0 0h42v160H0z"/>
+  <circle cx="92" cy="80" r="60" fill="url(#record)"/>
+  <g fill="none" stroke="#acbea0" opacity=".22"><circle cx="92" cy="80" r="53"/><circle cx="92" cy="80" r="46"/><circle cx="92" cy="80" r="39"/></g>
+  <circle cx="92" cy="80" r="23" fill="#d6b582"/>
+  <circle cx="92" cy="80" r="5" fill="#364539"/>
+  <path fill="#f4f1df" d="M12 18h19v3H12zm0 7h13v2H12zm0 112h19v3H12z"/>
+</svg>

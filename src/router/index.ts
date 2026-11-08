@@ -5,16 +5,17 @@ import AppShell from '../components/AppShell.vue'
 import ProfileView from '../views/ProfileView.vue'
 import SecurityView from '../views/SecurityView.vue'
 import UsersView from '../views/UsersView.vue'
+import MusicView from '../music/MusicView.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/', name: 'music', component: MusicView },
     { path: '/login', name: 'login', component: LoginView },
-    { path: '/', component: AppShell, meta: { requiresAuth: true }, children: [
-      { path: '', redirect: '/account' },
-      { path: 'account', name: 'account', component: ProfileView },
-      { path: 'security', name: 'security', component: SecurityView },
-      { path: 'users', name: 'users', component: UsersView, meta: { admin: true } },
+    { path: '/account', component: AppShell, meta: { requiresAuth: true }, children: [
+      { path: '', name: 'account', component: ProfileView },
+      { path: '/security', name: 'security', component: SecurityView },
+      { path: '/users', name: 'users', component: UsersView, meta: { admin: true } },
     ] },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],

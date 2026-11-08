@@ -1,8 +1,19 @@
-# Quản lý tài khoản — Vue + Supabase
+# Giai Điệu Thanh Xuân — Vue + Supabase
 
-Ứng dụng tiếng Việt gồm đăng nhập bằng email/mật khẩu, đăng xuất, hồ sơ cá nhân, đổi mật khẩu và phân quyền `admin` / `user`.
+Ứng dụng nghe nhạc tiếng Việt, xây dựng từ giao diện Giai Điệu Thanh Xuân. Trang nghe nhạc công khai; Supabase lưu thư viện, playlist và file âm thanh. Quản trị viên đăng nhập để tải nhạc, thêm link, sửa/ẩn/xóa bài hát. Khu vực hồ sơ và quản lý tài khoản vẫn có tại `/login`, `/account`, `/security` và `/users`.
 
-**Kiến trúc:** Vue 3 + TypeScript + Vite → Supabase Auth / REST API / PostgreSQL RPC. Supabase cung cấp backend API, không cần dựng thêm Express. Các lời gọi API được tập trung trong `src/services` và `src/stores/auth.ts`.
+**Kiến trúc:** Vue 3 + TypeScript + Vite → Supabase Auth / PostgreSQL / Storage. Không cần ASP.NET hoặc SQLite backend. Các lời gọi Supabase được tập trung trong `src/services` và `src/stores`.
+
+## Thiết lập thư viện nhạc
+
+Chạy cả hai migration theo thứ tự trong Supabase SQL Editor hoặc dùng `supabase db push`:
+
+1. `supabase/migrations/202611080001_accounts.sql`
+2. `supabase/migrations/202611080002_music_library.sql`
+
+Migration thứ hai tạo bảng `songs`, `playlists`, bucket Storage `music` (tối đa 30 MB) và chính sách RLS. Mọi người có thể nghe bài đang bật; chỉ hồ sơ có vai trò `admin` mới được ghi dữ liệu hoặc tải/xóa file. Các bài mẫu chỉ là thông tin minh họa, không có file âm thanh; đăng nhập admin rồi dùng **Tải nhạc lên** để thêm file có quyền sử dụng hoặc dán link nguồn.
+
+Sau khi tạo tài khoản theo hướng dẫn bên dưới, nâng tài khoản quản trị viên đầu tiên thành `admin` bằng SQL Editor như mô tả ở mục tiếp theo. Mở `/login` để vào hồ sơ; trang nghe nhạc nằm ở `/` và không yêu cầu đăng nhập.
 
 ## 1. Cài đặt
 
@@ -26,9 +37,9 @@ Cũng hỗ trợ `VITE_SUPABASE_ANON_KEY` cho dự án dùng key legacy. Không 
 
 Mở Supabase Dashboard → SQL Editor và chạy toàn bộ tệp:
 
-[`supabase/migrations/202611080001_accounts.sql`](supabase/migrations/202611080001_accounts.sql)
+Các tệp trong `supabase/migrations/`, theo thứ tự tên:
 
-Migration tạo bảng `profiles`, tự tạo hồ sơ cho tài khoản Auth mới, bổ sung hồ sơ cho tài khoản có sẵn và bật Row Level Security. Chỉ chạy migration này một lần trên database mới.
+Migration đầu tạo bảng `profiles`, tự tạo hồ sơ cho tài khoản Auth mới và bật Row Level Security. Migration kế tiếp tạo thư viện nhạc và Storage. Mỗi migration chỉ chạy một lần trên database mới.
 
 Nếu dùng Supabase CLI đã cài đặt:
 

@@ -153,6 +153,57 @@ body{background:#c5df81;min-width:360px;background-image:radial-gradient(#f2e89a
   .main-content{width:calc(100vw - 440px)}
   .festive-rail{width:220px}
 }
+
+/* Final color pass: warm cream surfaces and deeper side greens. */
+:root{--green:#3f6337;--paper:#f6f1e6;--lime:#92ae61}
+body{background:#b9cd77}
+.festive-rail{background:#b9cd77!important}
+.main-content,.retro-masthead,.retro-masthead:after{background-color:#f6f1e6}
+.retro-masthead,.legacy-panel,.music-widget,.management-panel{border-color:#6b8d4b}
+.topbar{background:#f2f4e9;border-color:#668847}
+.topbar .breadcrumb,.topbar .breadcrumb b{color:#3c6434}
+.upload-top,.music-widget,.management-panel,.legacy-panel{background-color:#fdfaf2}
+.music-widget-heading,.legacy-panel h3{background:#edf2e3;border-bottom-color:#547b3e}
+.music-widget-heading h2,.legacy-panel h3{color:#365c32}
+.music-upload-button{border-color:#6f9150;background:#fdfaf2;color:#3e6735}
+.music-upload-button:hover{background:#f1f5e9}
+.sound-player{background:#f0ecdf;border-color:#e2dfd4}
+.sound-play{border-color:#426f35;background:#527d40}
+.music-list-row:hover,.music-list-row.selected{background:#f0f3e9}
+.music-list-row:hover{box-shadow:inset 3px 0 #527b3e}
+.music-list-row.selected .music-row-title b,.music-row-play{color:#456b39}
+.music-library-heading h3 b{background:#e7eddc;color:#3f6337}
+.library-note i{background:#557d40}
+.music-empty{background:#f8f6ef}
+.empty-music-icon{background:#e7eddd;color:#456b39}
+
+/* Warm ivory surfaces with a slightly deeper leaf-green accent. */
+:root{--green:#3f6337;--paper:#f8f6ef;--lime:#92ae61}
+body{background-color:#f4f1e8}
+.main-content,.retro-masthead,.retro-masthead:after{background-color:#fbf9f2}
+.retro-masthead,.legacy-panel,.music-widget,.management-panel{border-color:#6b8d4b}
+.topbar{background:#f2f4e9;border-color:#668847}
+.topbar .breadcrumb,.topbar .breadcrumb b{color:#3c6434}
+.upload-top,.music-widget,.management-panel,.legacy-panel{background-color:#fffdf7}
+.music-widget-heading,.legacy-panel h3{background:#edf2e3;border-bottom-color:#547b3e}
+.music-widget-heading h2,.legacy-panel h3{color:#365c32}
+.music-upload-button{border-color:#6f9150;background:#fffdf7;color:#3e6735}
+.music-upload-button:hover{background:#f1f5e9}
+.sound-player{background:#f4f1e8;border-color:#e2dfd4}
+.sound-play{border-color:#426f35;background:#527d40}
+.music-list-row:hover,.music-list-row.selected{background:#f0f3e9}
+.music-list-row:hover{box-shadow:inset 3px 0 #527b3e}
+.music-list-row.selected .music-row-title b,.music-row-play{color:#456b39}
+.music-library-heading h3 b{background:#e7eddc;color:#3f6337}
+.library-note i{background:#557d40}
+.music-empty{background:#f8f6ef}
+.empty-music-icon{background:#e7eddd;color:#456b39}
+/* Slightly richer cream and deeper green side rails. */
+body{background-color:#b9cd77}
+.festive-rail{background-color:#b9cd77!important}
+.main-content,.retro-masthead,.retro-masthead:after{background-color:#f6f1e6}
+.music-widget,.management-panel,.legacy-panel{background-color:#fdfaf2}
+.sound-player{background:#f0ecdf}
 .soundcloud-panel{padding:18px;background:#f6f6f6;border:1px solid #e3e3e3;border-radius:5px}
 .soundcloud-embed{display:block;width:100%;height:300px;border:0;border-radius:4px;background:#fff}
 .youtube-playback-status{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;color:#527831;font:12px Arial,sans-serif}
@@ -446,6 +497,62 @@ body{background:#c5df81;min-width:360px;background-image:radial-gradient(#f2e89a
 @media(max-width:760px){
   .masthead-girl.masthead-portrait{right:0;top:auto;bottom:0;width:70px;height:135px}
   .masthead-title{right:70px;max-width:48%}
+}
+
+/* Music page motion: a soft entrance, tactile hover states, and a disc that
+   only spins while audio is actually playing. */
+.teen-mark{display:block;color:#171518;text-decoration:none;cursor:pointer;transition:transform .22s,text-shadow .22s}
+.teen-mark:hover{transform:translateY(-2px) scale(1.035);text-shadow:2px 4px #fff,0 0 12px #ffe45b}
+.teen-mark:focus-visible{outline:3px solid #467c2e;outline-offset:5px;border-radius:3px}
+.fireworks-overlay{position:fixed;inset:0;z-index:8;overflow:hidden;pointer-events:none}
+.fireworks-overlay:before{content:"";position:absolute;inset:-180px 0 0;background-image:radial-gradient(3px 3px at 18px 25px,#82a9cc 98%,transparent),radial-gradient(2px 2px at 85px 110px,#8ab894 98%,transparent),radial-gradient(3px 3px at 145px 65px,#a9bfd4 98%,transparent),radial-gradient(2px 2px at 53px 170px,#91b7c8 98%,transparent);background-size:190px 210px;opacity:.48;animation:snow-fall 7s linear infinite}
+.firework-burst{position:absolute;display:block;width:clamp(120px,16vw,210px);aspect-ratio:1;border-radius:50%;opacity:0;background:repeating-conic-gradient(from 0deg,#ff477e 0deg 2deg,transparent 2deg 8deg,#ffd84d 8deg 10deg,transparent 10deg 16deg,#53d9ff 16deg 18deg,transparent 18deg 24deg,#a77bff 24deg 26deg,transparent 26deg 32deg,#65f0ae 32deg 34deg,transparent 34deg 40deg);-webkit-mask:radial-gradient(circle,transparent 0 5%,#000 7% 58%,transparent 62%);mask:radial-gradient(circle,transparent 0 5%,#000 7% 58%,transparent 62%);filter:drop-shadow(0 0 7px #ff4b9e) drop-shadow(0 0 13px #55dafa);animation:page-firework 4.2s ease-out infinite}
+.burst-one{left:12%;top:15%;animation-delay:0s}
+.burst-two{right:14%;top:28%;animation-delay:1s}
+.burst-three{left:31%;top:60%;animation-delay:2s}
+.burst-four{right:29%;top:78%;animation-delay:3s}
+.retro-masthead{animation:music-enter .7s cubic-bezier(.2,.7,.25,1) both}
+.masthead-confetti{animation:music-sparkle 3.8s ease-in-out infinite}
+.polaroid{transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s}
+.polaroid:hover{z-index:5;transform:translateY(-7px) rotate(0deg) scale(1.045);box-shadow:0 18px 36px #25351c38}
+.music-widget{animation:music-enter .65s .08s cubic-bezier(.2,.7,.25,1) both;box-shadow:0 8px 24px #33451c0a;transition:box-shadow .3s,border-color .3s}
+.music-widget:hover{border-color:#cbd8bb;box-shadow:0 14px 36px #33451c12}
+.music-widget-heading h2{transition:letter-spacing .25s,color .25s}
+.music-widget-heading:hover h2{letter-spacing:1.4px;color:#34712f}
+.music-upload-button,.music-row-play,.sound-action,.sound-play,.icon-button,.nav-item{transition:transform .2s cubic-bezier(.2,.75,.25,1),box-shadow .2s,background-color .2s,color .2s}
+.music-upload-button:hover{transform:translateY(-2px);box-shadow:0 6px 13px #365a251f}
+.music-upload-button:active,.sound-play:active,.music-row-play:active{transform:scale(.94)}
+.music-list-row{transition:background .2s,transform .2s,box-shadow .2s}
+.music-list-row:hover{transform:translateX(3px);box-shadow:inset 3px 0 #83a968}
+.music-row-cover{transition:transform .28s,box-shadow .28s}
+.music-list-row:hover .music-row-cover{transform:rotate(-4deg) scale(1.07);box-shadow:0 5px 12px #26351d21}
+.sound-cover{transform:translateZ(0)}
+.sound-player.playing .sound-cover>span{animation:vinyl-turn 9s linear infinite}
+.sound-player.playing .sound-cover{box-shadow:0 8px 25px #23342132,inset 0 0 0 1px #00000012}
+.sound-player.playing .wave-bar{animation:wave-breathe .72s ease-in-out infinite alternate}
+.sound-player.playing .wave-bar:nth-child(3n){animation-delay:-.42s}
+.sound-player.playing .wave-bar:nth-child(3n + 1){animation-delay:-.19s}
+.sound-play{box-shadow:0 5px 12px #477c2b35}
+.sound-play:hover{transform:scale(1.06);box-shadow:0 9px 20px #477c2b45}
+.sound-action:hover,.music-row-play:hover{transform:scale(1.1);color:#527c3b}
+.empty-music-icon{animation:music-float 3.4s ease-in-out infinite}
+.management-row{transition:background .2s,transform .2s}
+.management-row:hover{transform:translateX(3px)}
+.toast{animation:toast-arrive .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes music-enter{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@keyframes music-sparkle{0%,100%{opacity:.72;transform:rotate(0) scale(.94)}50%{opacity:1;transform:rotate(24deg) scale(1.08)}}
+@keyframes music-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes vinyl-turn{to{transform:rotate(360deg)}}
+@keyframes wave-breathe{from{transform:scaleY(.58);opacity:.65}to{transform:scaleY(1);opacity:1}}
+@keyframes toast-arrive{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes page-firework{0%,100%{opacity:0;transform:scale(.12) rotate(-12deg)}5%{opacity:.92}15%{opacity:.62;transform:scale(1) rotate(12deg)}30%{opacity:0;transform:scale(1.22) rotate(25deg)}}
+@keyframes snow-fall{to{transform:translateY(210px)}}
+@media(prefers-reduced-motion:reduce){
+  .retro-masthead,.music-widget,.toast{animation:none}
+  .masthead-confetti,.empty-music-icon,.sound-player.playing .sound-cover>span,.sound-player.playing .wave-bar{animation:none}
+  .fireworks-overlay:before{animation:none}
+  .firework-burst{animation:none;opacity:.2;transform:scale(.7)}
+  .polaroid,.music-widget,.music-list-row,.music-row-cover,.music-upload-button,.music-row-play,.sound-action,.sound-play,.icon-button,.nav-item,.management-row{transition:none}
 }
 
 /* Final alignment and exact background match for the supplied Tet artwork. */

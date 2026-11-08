@@ -4,6 +4,7 @@ import WelcomeSlideshow from './components/WelcomeSlideshow.vue'
 import YouTubePlayer from './components/YouTubePlayer.vue'
 import SongArtwork from './components/SongArtwork.vue'
 import { auth } from '../stores/auth'
+import { getMusicLinkMetadata } from '../services/musicMetadata'
 import { deleteSong as removeSong, getManagedSongs, getPlaylists, getSongs, saveSong, setSongActive as updateSongStatus, updateSong as editSongRecord, uploadSong as uploadSongFile } from '../services/music'
 import { AudioLines, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Disc3, Download, Ellipsis, Heart, Home, Library, ListMusic, Menu, Mic2, Music2, Pause, Pencil, Play, Plus, Repeat2, Search, Settings2, Shuffle, SkipBack, SkipForward, Trash2, Upload, Volume2, X } from '@lucide/vue'
 
@@ -143,7 +144,7 @@ async function playSong(song) {
     audio.value.pause()
     audio.value.src = song.audioUrl
     audio.value.volume = volume.value / 100
-    audio.value.play().then(() => { isPlaying.value = true }).catch(() => { isPlaying.value = false; showToast('Không thể phát file nhạc này') })
+    audio.value.play().then(() => { isPlaying.value = true }).catch(() => { isPlaying.value = false; showToast('Trình duyệt chặn tự phát. Nhấn nút phát để bắt đầu nghe.') })
   } else {
     isPlaying.value = false
     showToast('Trình phát chưa sẵn sàng. Tải lại trang rồi thử lại nhé.')
@@ -211,9 +212,33 @@ async function addSongLink() {
 }
 function providerDetailsForLink(url) { try { return new URL(url).hostname } catch { return '' } }
 watch([audioLink, uploadMode, showUpload], ([url, mode, isOpen]) => {
-  if (isOpen && mode === 'link' && url.trim()) metadataNote.value = 'Nhập tên bài hát và ca sĩ theo ý bạn trước khi lưu.'
-  else metadataNote.value = ''
-  metadataLoading.value = false
+  clearTimeout(metadataTimer)
+  const requestId = ++metadataRequestId
+  if (lastAutoTitle.value && uploadTitle.value === lastAutoTitle.value) uploadTitle.value = ''
+  if (lastAutoArtist.value && uploadArtist.value === lastAutoArtist.value) uploadArtist.value = ''
+  lastAutoTitle.value = ''; lastAutoArtist.value = ''
+  metadataNote.value = ''; metadataLoading.value = false
+  if (!isOpen || mode !== 'link' || !url.trim()) return
+  metadataTimer = window.setTimeout(async () => {
+    metadataLoading.value = true
+    try {
+      const metadata = await getMusicLinkMetadata(url.trim())
+      if (requestId !== metadataRequestId) return
+      if (metadata.title && (!uploadTitle.value.trim() || uploadTitle.value === lastAutoTitle.value)) {
+        uploadTitle.value = metadata.title; lastAutoTitle.value = metadata.title
+      }
+      if (metadata.artist && (!uploadArtist.value.trim() || uploadArtist.value === lastAutoArtist.value)) {
+        uploadArtist.value = metadata.artist; lastAutoArtist.value = metadata.artist
+      }
+      metadataNote.value = metadata.title || metadata.artist
+        ? 'Đã lấy thông tin từ link. Bạn có thể sửa lại trước khi lưu.'
+        : 'Nguồn này chưa trả thông tin; bạn có thể nhập tên thủ công.'
+    } catch {
+      if (requestId === metadataRequestId) metadataNote.value = 'Không đọc được metadata từ nguồn này; bạn có thể nhập tên thủ công.'
+    } finally {
+      if (requestId === metadataRequestId) metadataLoading.value = false
+    }
+  }, 450)
 })
 function externalEmbedUrl(song) {
   try {
@@ -297,7 +322,12 @@ function updateYouTubeDuration(seconds) {
   const song = songs.value.find(item => item.id === activeSong.value.id)
   if (song) song.duration = activeSong.value.duration
 }
-onMounted(async () => { await auth.init(); await Promise.all([loadSongs(), loadPlaylists()]); if (visibleSongs.value.length) activeSong.value = visibleSongs.value[0]; if (audio.value) audio.value.volume = volume.value / 100 })
+onMounted(async () => {
+  await auth.init()
+  await Promise.all([loadSongs(), loadPlaylists()])
+  if (audio.value) audio.value.volume = volume.value / 100
+  if (visibleSongs.value.length) await playSong(visibleSongs.value[0])
+})
 </script>
 
 <template>

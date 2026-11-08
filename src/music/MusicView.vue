@@ -310,7 +310,6 @@ watch(() => [activeSong.value?.id, activeSong.value?.audioUrl, isResolvingEmbed.
   } catch { /* SoundCloud iframe still plays normally if its optional status API is unavailable. */ }
 })
 function showToast(message) { toast.value = message; window.setTimeout(() => { toast.value = '' }, 2600) }
-function reloadMusicPage() { window.location.reload() }
 function setSeek(event) { if (!duration.value) return; const bounds = event.currentTarget.getBoundingClientRect(); const next = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width)) * duration.value; currentTime.value = next; if (audio.value && activeSong.value?.audioUrl) audio.value.currentTime = next }
 function handleLoadedMetadata() {
   if (!audio.value || !Number.isFinite(audio.value.duration)) return
@@ -361,7 +360,7 @@ onMounted(async () => {
     </aside>
 
     <main id="top" class="main-content">
-      <header class="retro-masthead"><div class="masthead-stripes"></div><div class="masthead-logo"><a class="teen-mark" href="/" aria-label="8X Teen — tải lại trang nhạc" @click.prevent="reloadMusicPage">8X<small>TEEN</small></a><span class="masthead-tagline">XUANDIEUCLUB.TK <i>—</i> WEBSITE KẾT NỐI THẾ HỆ <b>8X, 9X, 2K</b></span></div><div class="masthead-title"><small>THẾ GIỚI GIẢI TRÍ 1.0</small><strong>XuandieuClub.TK</strong><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span></div><div class="masthead-polaroids"><div class="polaroid p-one"><img src="/images/portraits/D65A7652.jpg" alt="Ảnh chân dung cùng gấu bông" width="734" height="1100" /></div><div class="polaroid p-two"><img src="/images/portraits/D65A7603.jpg" alt="Ảnh cận cảnh cùng hai chú gấu bông" width="1100" height="734" /></div><div class="polaroid p-three"><img src="/images/portraits/D65A7749.jpg" alt="Ảnh kỷ niệm cùng bánh sinh nhật" width="734" height="1100" /></div></div><div class="masthead-girl masthead-portrait"><img src="/images/portraits/masthead-cutout.png" alt="Ảnh chân dung trang trí đầu trang" width="533" height="800" /></div><span class="masthead-confetti">✳</span></header>
+      <header class="retro-masthead"><div class="masthead-stripes"></div><div class="masthead-logo"><a class="teen-mark" href="/" aria-label="8X Teen — phát hoặc tạm dừng nhạc" @click.prevent="togglePlayback">8X<small>TEEN</small></a><span class="masthead-tagline">XUANDIEUCLUB.TK <i>—</i> WEBSITE KẾT NỐI THẾ HỆ <b>8X, 9X, 2K</b></span></div><div class="masthead-title"><small>THẾ GIỚI GIẢI TRÍ 1.0</small><strong>XuandieuClub.TK</strong><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span></div><div class="masthead-polaroids"><div class="polaroid p-one"><img src="/images/portraits/D65A7652.jpg" alt="Ảnh chân dung cùng gấu bông" width="734" height="1100" /></div><div class="polaroid p-two"><img src="/images/portraits/D65A7603.jpg" alt="Ảnh cận cảnh cùng hai chú gấu bông" width="1100" height="734" /></div><div class="polaroid p-three"><img src="/images/portraits/D65A7749.jpg" alt="Ảnh kỷ niệm cùng bánh sinh nhật" width="734" height="1100" /></div></div><div class="masthead-girl masthead-portrait"><img src="/images/portraits/masthead-cutout.png" alt="Ảnh chân dung trang trí đầu trang" width="533" height="800" /></div><span class="masthead-confetti">✳</span></header>
       <header class="topbar"><button class="mobile-menu icon-button" aria-label="Mở menu"><Menu :size="21"/></button><div class="breadcrumb"><span>Âm nhạc</span><ChevronRight :size="14"/><b>{{ activeNav }}</b></div><div class="topbar-right"><button v-if="isAdmin" :class="['manage-top-button',{active:activeNav==='Quản lý'}]" @click="navigate(activeNav==='Quản lý'?'Khám phá':'Quản lý')"><Settings2 :size="15"/><span>{{ activeNav==='Quản lý'?'Quay lại nhạc':'Quản lý bài hát' }}</span></button><button v-if="isAdmin" class="upload-top" @click="showUpload = true"><Upload :size="15"/><span>Tải nhạc lên</span></button><a v-if="!session" class="login-top-button" href="/login?redirect=/">Đăng nhập</a><a v-else class="avatar" href="/account" aria-label="Tài khoản" title="Tài khoản">A</a></div></header>
       <div class="page-body">
         <aside class="legacy-left"><section class="legacy-panel"><h3>CHUYÊN MỤC</h3><a v-for="item in ['GÁI XINH  💥','KẾT QUẢ SỐ XỔ','VIDEO  🔥','Lưu bút','Girl Việt Nam','Girl Trung Quốc','Girl Hàn Quốc','Girl Japan','Girl Thái Lan','BIKINI tuyển chọn','Gái cực xinh','Người mẫu ảnh','HOT GIRL','Hằng tuyển','Giải trí','Hình ảnh','Hoài niệm','Thủ thuật game','Thủ thuật hay','Tin tức']" :key="item" href="#music"><b>✚</b> {{ item }}</a></section><section class="legacy-panel"><h3>GÓC KỶ NIỆM</h3><a v-for="item in ['Tình yêu tuổi học trò','Lời muốn nói','Thơ tình','Nhật ký mùa hè','Bạn bè 4 phương']" :key="item" href="#music"><b>☷</b> {{ item }}</a></section><div class="left-sticker">✿<span>thanh xuân<br/><small>ngày ấy</small></span>✿</div></aside>
@@ -430,6 +429,24 @@ onMounted(async () => {
               <div v-else class="empty-list">Chưa có bài hát nào được lưu. Hãy tải nhạc lên để thêm vào danh sách.</div>
             </section>
             <audio ref="audio" @timeupdate="currentTime = audio?.currentTime || 0" @loadedmetadata="handleLoadedMetadata" @play="isPlaying = true" @pause="isPlaying = false" @ended="handleEnded" />
+          </section>
+          <section v-if="activeNav !== 'Quản lý'" class="music-memory-section">
+            <header class="music-memory-heading"><span>GIAI ĐIỆU THANH XUÂN</span><h2>Nghe lại những bài hát yêu thích</h2><p>Chọn một giai điệu để phát ngay trong trình nghe nhạc.</p></header>
+            <div v-if="visibleSongs.length" class="memory-song-grid">
+              <button v-for="song in visibleSongs.slice(0, 8)" :key="song.id" class="memory-song-card" @click="playSong(song)">
+                <SongArtwork class="memory-song-art" :song="song" />
+                <span class="memory-song-copy"><b>{{ song.title }}</b><small>{{ song.artist }}</small></span>
+                <span class="memory-song-action"><Pause v-if="activeSong?.id===song.id && isPlaying" :size="16" fill="currentColor"/><Play v-else :size="16" fill="currentColor"/></span>
+              </button>
+            </div>
+            <div v-else class="memory-song-empty">Bài hát đã lưu sẽ xuất hiện ở đây.</div>
+            <div class="memory-photo-strip" aria-label="Khoảnh khắc thanh xuân">
+              <img src="/images/portraits/D65A7652.jpg" alt="Khoảnh khắc thanh xuân 1" loading="lazy" />
+              <img src="/images/portraits/D65A7603.jpg" alt="Khoảnh khắc thanh xuân 2" loading="lazy" />
+              <img src="/images/portraits/D65A7749.jpg" alt="Khoảnh khắc thanh xuân 3" loading="lazy" />
+              <img src="/images/portraits/D65A7670.jpg" alt="Khoảnh khắc thanh xuân 4" loading="lazy" />
+            </div>
+            <footer class="music-memory-footer"><span>ÂM NHẠC · KỶ NIỆM · BẠN BÈ</span><p>Giữ lại những giai điệu đẹp của một thời thanh xuân.</p></footer>
           </section>
         </div>
         <aside class="legacy-right"><section class="legacy-panel"><h3>TÌM KIẾM</h3><div class="old-search"><input v-model="query" placeholder="Từ khóa..." @keyup.enter="searchMusic"/><button @click="searchMusic">Tìm kiếm</button></div></section><section class="legacy-panel"><h3>TIVI ONLINE</h3><div class="tv-grid"><button v-for="channel in ['VTV1','VTV2','VTV3','VTV4','VTV5','VTV5 TN','VTV6','VTV7 HD','VTV8','VTV9']" :key="channel" @click="showToast('Kênh ' + channel)"><b>{{ channel }}</b></button></div></section><section class="legacy-panel"><h3>GÓC TIN HỌC</h3><a v-for="item in ['Hướng dẫn làm blog','Tạo avatar Yahoo','Ký tự ALT đẹp','Mặt cười Yahoo','Bảng mã màu','Nick Yahoo độc','Chuyển đổi mã HTML']" :key="item" href="#music"><b>▸</b> {{ item }}</a></section><div class="right-sticker">✿<span>xuân<br/>đã về</span></div></aside>
